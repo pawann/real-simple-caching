@@ -1,17 +1,16 @@
 package org.pn.real.simple.service;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.pn.real.simple.caching.Application;
+import org.pn.real.simple.caching.ApplicationConfig;
 import org.pn.real.simple.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = { Application.class })
+@SpringBootTest(classes = { ApplicationConfig.class })
 public class BookServiceTest {
 
     @Autowired
@@ -25,7 +24,7 @@ public class BookServiceTest {
         Assert.assertEquals(isbn, book.getIsbn());
     }
 
-    @Ignore("Ignored until caching is implemented")
+    // @Ignore("Ignored until caching is implemented")
     @Test
     public void testGetBookCaching() {
         String isbn = "1";
@@ -39,7 +38,6 @@ public class BookServiceTest {
 
         // Caching test
         Assert.assertEquals(book2, book1);
-
     }
 
 }

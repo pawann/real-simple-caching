@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <jmxConfigurator/>
+    <timestamp key="byDay" datePattern="yyyyMMdd'T'HHmmss"/>
+    <property name="logDir" value="${APP_LOG_DIR:-/opt/app-logs}"/>
+    
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+            </Pattern>
+        </encoder>
+    </appender>
+    
+    
+    <!-- 
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+          <file>${logDir}/real-simple-caching.log</file>
+          <append>true</append>
+          
+	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	      < ! - - daily rollover - - >
+	      <fileNamePattern>${logDir}/archived/real-simple-caching.%d{yyyyMMdd}.log</fileNamePattern>
+	
+	      < ! - - keep 30 days' worth of history capped at 1GB total size - - >
+	      <maxHistory>30</maxHistory>
+	      <totalSizeCap>1GB</totalSizeCap>
+	      
+	    </rollingPolicy>
+          <encoder>
+             <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+          </encoder>
+    </appender>
+    
+    < ! - - Performance logs dont need be a rolling one since it useful when performance are in a single file until the server is restarted - - >
+    <appender name="PERF" class="ch.qos.logback.core.FileAppender">
+          <file>${logDir}/real-simple-caching-perf-${byDay}.log</file>
+          <append>true</append>
+          <encoder>
+             <pattern>[%t],%d{yyyy-MM-dd HH:mm:ss.SSS},%msg%n</pattern>
+          </encoder>
+    </appender>
+     -->
+    <root level="${APP_ROOT_LOGGING_LEVEL:-WARN}">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+    <logger name="org.pn.real.simple" level="${APP_LOGGING_LEVEL:-DEBUG}" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <logger name="org.springframework" level="ERROR" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+</configuration>

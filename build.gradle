@@ -1,15 +1,22 @@
 apply plugin: 'java'
+apply plugin: 'application'
 apply plugin: 'eclipse'
 
 
 sourceCompatibility = 1.8
 version = '0.0.1-SNAPSHOT'
-
+mainClassName = 'org.pn.real.simple.caching.Application'
 jar {
     manifest {
         attributes 'Implementation-Title': 'Real simple caching',
-                   'Implementation-Version': version
+                   'Implementation-Version': version,
+                   'Main-Class': mainClassName
     }
+    
+    //Build fat jar, with dependencies
+    //from {
+       // configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    //}
 }
 
 
@@ -36,5 +43,9 @@ dependencies {
     //Test
     testCompile group: 'junit', name: 'junit', version:'4.12'
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.10.RELEASE'
+}
+
+run {
+     main = mainClassName
 }
 
