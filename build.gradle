@@ -1,0 +1,40 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+
+sourceCompatibility = 1.8
+version = '0.0.1-SNAPSHOT'
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Real simple caching',
+                   'Implementation-Version': version
+    }
+}
+
+
+repositories {
+  mavenCentral() 
+}
+
+dependencies {
+
+    //Spring boot
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '1.5.10.RELEASE'
+
+    // JCache api
+    compile group: 'javax.cache', name: 'cache-api', version: '1.1.0'
+    
+    //Caching implementation
+    compile group: 'org.ehcache', name: 'ehcache', version: '3.4.0'
+
+    // Logging   
+	runtime group: 'org.slf4j', name: 'slf4j-api', version:'1.7.24'
+    runtime group: 'org.slf4j', name:'jcl-over-slf4j', version:'1.7.24'
+    runtime group: 'ch.qos.logback',name:'logback-classic', version:'1.2.1'
+
+    //Test
+    testCompile group: 'junit', name: 'junit', version:'4.12'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.10.RELEASE'
+}
+
